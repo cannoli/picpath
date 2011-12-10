@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface PPModel : NSObject
 {
@@ -19,5 +20,6 @@
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (void) saveContext;
-
+- (void) addEventWithDate:(NSDate*)eventDate location:(CLLocation*)eventLoc;
+- (NSMutableArray*) fetchEvents;
 @end

@@ -23,6 +23,7 @@
 
 // app variables
 @synthesize dataModel = _dataModel;
+@synthesize locationManager = _locationManager;
 
 - (void)dealloc
 {
@@ -35,8 +36,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
-    UIViewController *viewController1, *viewController2;
+
+    [self appInit];
+
+    MapViewController *viewController1; 
+    UIViewController *viewController2;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         viewController1 = [[[MapViewController alloc] initWithNibName:@"MapViewController_iPhone" bundle:nil] autorelease];
         viewController2 = [[[SecondViewController alloc] initWithNibName:@"SecondViewController_iPhone" bundle:nil] autorelease];
@@ -44,11 +48,11 @@
         viewController1 = [[[MapViewController alloc] initWithNibName:@"MapViewController_iPad" bundle:nil] autorelease];
         viewController2 = [[[SecondViewController alloc] initWithNibName:@"SecondViewController_iPad" bundle:nil] autorelease];
     }
+    viewController1.dataModel = [self dataModel];
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:viewController1, viewController2, nil];
     self.window.rootViewController = self.tabBarController;
     
-    [self appInit];
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -106,11 +110,46 @@
 - (void) appInit
 {
     self.dataModel = [[PPModel alloc] init];
+    
+    
+    // Start the location manager.
+	[[self locationManager] startUpdatingLocation];
+    
+    // HACK
+    /*
+    CLLocation *location = [_locationManager location];
+	if (location) 
+    {
+        [self.dataModel addEventWithDate:[NSDate date] location:location];
+	}
+     */
+    // HACK
 }
 
 - (void) appShutdown
 {
+    self.locationManager = nil;
     self.dataModel = nil;
+}
+
+
+#pragma mark - Location manager
+
+/**
+ Return a location manager -- create one if necessary.
+ */
+- (CLLocationManager *)locationManager 
+{	
+    if (_locationManager != nil) 
+    {
+		return _locationManager;
+	}
+	
+	_locationManager = [[CLLocationManager alloc] init];
+	[_locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+	[_locationManager setDelegate:self];
+	
+	return _locationManager;
 }
 
 

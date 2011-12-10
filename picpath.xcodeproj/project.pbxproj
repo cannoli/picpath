@@ -28,6 +28,7 @@
 		C47073AD1492DAB8005435C7 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = C47073AC1492DAB8005435C7 /* Event.m */; };
 		C47073B41492DBA9005435C7 /* PPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C47073B31492DBA9005435C7 /* PPModel.m */; };
 		C47073BA1492E568005435C7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47073B91492E568005435C7 /* CoreData.framework */; };
+		C47073BC14934E32005435C7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47073BB14934E32005435C7 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		C47073B21492DBA9005435C7 /* PPModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PPModel.h; path = data/PPModel.h; sourceTree = "<group>"; };
 		C47073B31492DBA9005435C7 /* PPModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PPModel.m; path = data/PPModel.m; sourceTree = "<group>"; };
 		C47073B91492E568005435C7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C47073BB14934E32005435C7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C47073BC14934E32005435C7 /* CoreLocation.framework in Frameworks */,
 				C47073BA1492E568005435C7 /* CoreData.framework in Frameworks */,
 				C47073711492BF67005435C7 /* MapKit.framework in Frameworks */,
 				C470733C1492BC92005435C7 /* UIKit.framework in Frameworks */,
@@ -81,7 +84,6 @@
 		C470732C1492BC92005435C7 = {
 			isa = PBXGroup;
 			children = (
-				C47073B91492E568005435C7 /* CoreData.framework */,
 				C47073411492BC92005435C7 /* picpath */,
 				C470733A1492BC92005435C7 /* Frameworks */,
 				C47073381492BC92005435C7 /* Products */,
@@ -99,6 +101,8 @@
 		C470733A1492BC92005435C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C47073BB14934E32005435C7 /* CoreLocation.framework */,
+				C47073B91492E568005435C7 /* CoreData.framework */,
 				C47073701492BF67005435C7 /* MapKit.framework */,
 				C470733B1492BC92005435C7 /* UIKit.framework */,
 				C470733D1492BC92005435C7 /* Foundation.framework */,

@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <MapKit/MKAnnotation.h>
 
 
-@interface Event : NSManagedObject
+@interface Event : NSManagedObject<MKAnnotation>
 
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSNumber * latitude;

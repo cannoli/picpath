@@ -8,6 +8,7 @@
 
 #import <UIKit/UIManagedDocument.h>
 #import "PPModel.h"
+#import "Event.h"
 
 static NSString* const PERSISTENTSTORE_NAME = @"PicPath.sqlite";
 
@@ -116,6 +117,48 @@ static NSString* const PERSISTENTSTORE_NAME = @"PicPath.sqlite";
     }
 }    
 
+- (void) addEventWithDate:(NSDate*)eventDate location:(CLLocation*)eventLoc
+{
+	Event *event = (Event *)[NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:_managedObjectContext];
+	CLLocationCoordinate2D coordinate = [eventLoc coordinate];
+	[event setLatitude:[NSNumber numberWithDouble:coordinate.latitude]];
+	[event setLongitude:[NSNumber numberWithDouble:coordinate.longitude]];
+	[event setDate:eventDate];
+
+    // Commit the change.
+	NSError *error = nil;
+	if (![_managedObjectContext save:&error]) 
+    {
+		// Handle the error.
+	}
+}
+
+- (NSMutableArray*) fetchEvents
+{
+	/*
+	 Fetch existing events.
+	 Create a fetch request, add a sort descriptor, then execute the fetch.
+	 */
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:_managedObjectContext];
+	[request setEntity:entity];
+	
+	// Order the events by creation date, most recent first.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	[request setSortDescriptors:sortDescriptors];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+	// Execute the fetch -- create a mutable copy of the result.
+	NSError *error = nil;
+	NSMutableArray *mutableFetchResults = [[_managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+	if (mutableFetchResults == nil) {
+		// Handle the error.
+	}
+	[request release];        
+    return [mutableFetchResults autorelease];
+}
 
 #pragma mark -
 #pragma mark Application's documents directory

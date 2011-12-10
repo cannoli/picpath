@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 @class MKMapView;
-
+@class PPModel;
 @interface MapViewController : UIViewController
+{
+    PPModel* _dataModel;
+}
+
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic, retain) PPModel* dataModel;
 @end
