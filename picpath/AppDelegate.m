@@ -3,11 +3,11 @@
 //  picpath
 //
 //  Created by Shu Chiun Cheah on 12/9/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 GeoloPigs Inc. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "FirstViewController.h"
+#import "MapViewController.h"
 #import "SecondViewController.h"
 #import "PPModel.h"
 
@@ -38,10 +38,10 @@
     // Override point for customization after application launch.
     UIViewController *viewController1, *viewController2;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        viewController1 = [[[FirstViewController alloc] initWithNibName:@"FirstViewController_iPhone" bundle:nil] autorelease];
+        viewController1 = [[[MapViewController alloc] initWithNibName:@"MapViewController_iPhone" bundle:nil] autorelease];
         viewController2 = [[[SecondViewController alloc] initWithNibName:@"SecondViewController_iPhone" bundle:nil] autorelease];
     } else {
-        viewController1 = [[[FirstViewController alloc] initWithNibName:@"FirstViewController_iPad" bundle:nil] autorelease];
+        viewController1 = [[[MapViewController alloc] initWithNibName:@"MapViewController_iPad" bundle:nil] autorelease];
         viewController2 = [[[SecondViewController alloc] initWithNibName:@"SecondViewController_iPad" bundle:nil] autorelease];
     }
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];

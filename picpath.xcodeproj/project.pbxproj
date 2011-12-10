@@ -13,14 +13,14 @@
 		C47073461492BC92005435C7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C47073441492BC92005435C7 /* InfoPlist.strings */; };
 		C47073481492BC92005435C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C47073471492BC92005435C7 /* main.m */; };
 		C470734C1492BC92005435C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C470734B1492BC92005435C7 /* AppDelegate.m */; };
-		C470734F1492BC92005435C7 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C470734E1492BC92005435C7 /* FirstViewController.m */; };
+		C470734F1492BC92005435C7 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C470734E1492BC92005435C7 /* MapViewController.m */; };
 		C47073511492BC92005435C7 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = C47073501492BC92005435C7 /* first.png */; };
 		C47073531492BC92005435C7 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C47073521492BC92005435C7 /* first@2x.png */; };
 		C47073561492BC92005435C7 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C47073551492BC92005435C7 /* SecondViewController.m */; };
 		C47073581492BC92005435C7 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = C47073571492BC92005435C7 /* second.png */; };
 		C470735A1492BC92005435C7 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C47073591492BC92005435C7 /* second@2x.png */; };
-		C470735D1492BC92005435C7 /* FirstViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C470735B1492BC92005435C7 /* FirstViewController_iPhone.xib */; };
-		C47073601492BC92005435C7 /* FirstViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C470735E1492BC92005435C7 /* FirstViewController_iPad.xib */; };
+		C470735D1492BC92005435C7 /* MapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C470735B1492BC92005435C7 /* MapViewController_iPhone.xib */; };
+		C47073601492BC92005435C7 /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C470735E1492BC92005435C7 /* MapViewController_iPad.xib */; };
 		C47073631492BC92005435C7 /* SecondViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C47073611492BC92005435C7 /* SecondViewController_iPhone.xib */; };
 		C47073661492BC92005435C7 /* SecondViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C47073641492BC92005435C7 /* SecondViewController_iPad.xib */; };
 		C47073711492BF67005435C7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47073701492BF67005435C7 /* MapKit.framework */; };
@@ -41,16 +41,16 @@
 		C47073491492BC92005435C7 /* picpath-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "picpath-Prefix.pch"; sourceTree = "<group>"; };
 		C470734A1492BC92005435C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C470734B1492BC92005435C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C470734D1492BC92005435C7 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		C470734E1492BC92005435C7 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		C470734D1492BC92005435C7 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		C470734E1492BC92005435C7 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		C47073501492BC92005435C7 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		C47073521492BC92005435C7 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
 		C47073541492BC92005435C7 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		C47073551492BC92005435C7 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		C47073571492BC92005435C7 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		C47073591492BC92005435C7 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
-		C470735C1492BC92005435C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstViewController_iPhone.xib; sourceTree = "<group>"; };
-		C470735F1492BC92005435C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstViewController_iPad.xib; sourceTree = "<group>"; };
+		C470735C1492BC92005435C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MapViewController_iPhone.xib; sourceTree = "<group>"; };
+		C470735F1492BC92005435C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MapViewController_iPad.xib; sourceTree = "<group>"; };
 		C47073621492BC92005435C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController_iPhone.xib; sourceTree = "<group>"; };
 		C47073651492BC92005435C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController_iPad.xib; sourceTree = "<group>"; };
 		C47073701492BF67005435C7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -112,16 +112,16 @@
 			children = (
 				C470734A1492BC92005435C7 /* AppDelegate.h */,
 				C470734B1492BC92005435C7 /* AppDelegate.m */,
-				C470734D1492BC92005435C7 /* FirstViewController.h */,
-				C470734E1492BC92005435C7 /* FirstViewController.m */,
+				C470734D1492BC92005435C7 /* MapViewController.h */,
+				C470734E1492BC92005435C7 /* MapViewController.m */,
 				C47073501492BC92005435C7 /* first.png */,
 				C47073521492BC92005435C7 /* first@2x.png */,
 				C47073541492BC92005435C7 /* SecondViewController.h */,
 				C47073551492BC92005435C7 /* SecondViewController.m */,
 				C47073571492BC92005435C7 /* second.png */,
 				C47073591492BC92005435C7 /* second@2x.png */,
-				C470735B1492BC92005435C7 /* FirstViewController_iPhone.xib */,
-				C470735E1492BC92005435C7 /* FirstViewController_iPad.xib */,
+				C470735B1492BC92005435C7 /* MapViewController_iPhone.xib */,
+				C470735E1492BC92005435C7 /* MapViewController_iPad.xib */,
 				C47073611492BC92005435C7 /* SecondViewController_iPhone.xib */,
 				C47073641492BC92005435C7 /* SecondViewController_iPad.xib */,
 				C47073AE1492DAC4005435C7 /* data */,
@@ -209,8 +209,8 @@
 				C47073531492BC92005435C7 /* first@2x.png in Resources */,
 				C47073581492BC92005435C7 /* second.png in Resources */,
 				C470735A1492BC92005435C7 /* second@2x.png in Resources */,
-				C470735D1492BC92005435C7 /* FirstViewController_iPhone.xib in Resources */,
-				C47073601492BC92005435C7 /* FirstViewController_iPad.xib in Resources */,
+				C470735D1492BC92005435C7 /* MapViewController_iPhone.xib in Resources */,
+				C47073601492BC92005435C7 /* MapViewController_iPad.xib in Resources */,
 				C47073631492BC92005435C7 /* SecondViewController_iPhone.xib in Resources */,
 				C47073661492BC92005435C7 /* SecondViewController_iPad.xib in Resources */,
 			);
@@ -225,7 +225,7 @@
 			files = (
 				C47073481492BC92005435C7 /* main.m in Sources */,
 				C470734C1492BC92005435C7 /* AppDelegate.m in Sources */,
-				C470734F1492BC92005435C7 /* FirstViewController.m in Sources */,
+				C470734F1492BC92005435C7 /* MapViewController.m in Sources */,
 				C47073561492BC92005435C7 /* SecondViewController.m in Sources */,
 				C47073A91492D142005435C7 /* picpath.xcdatamodeld in Sources */,
 				C47073AD1492DAB8005435C7 /* Event.m in Sources */,
@@ -244,20 +244,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		C470735B1492BC92005435C7 /* FirstViewController_iPhone.xib */ = {
+		C470735B1492BC92005435C7 /* MapViewController_iPhone.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				C470735C1492BC92005435C7 /* en */,
 			);
-			name = FirstViewController_iPhone.xib;
+			name = MapViewController_iPhone.xib;
 			sourceTree = "<group>";
 		};
-		C470735E1492BC92005435C7 /* FirstViewController_iPad.xib */ = {
+		C470735E1492BC92005435C7 /* MapViewController_iPad.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				C470735F1492BC92005435C7 /* en */,
 			);
-			name = FirstViewController_iPad.xib;
+			name = MapViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 		C47073611492BC92005435C7 /* SecondViewController_iPhone.xib */ = {

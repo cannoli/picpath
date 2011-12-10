@@ -1,14 +1,14 @@
 //
-//  FirstViewController.m
+//  MapViewController.m
 //  picpath
 //
 //  Created by Shu Chiun Cheah on 12/9/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 GeoloPigs Inc. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "MapViewController.h"
 
-@implementation FirstViewController
+@implementation MapViewController
 @synthesize mapView = _mapView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
