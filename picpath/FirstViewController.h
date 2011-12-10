@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class MKMapView;
 
 @interface FirstViewController : UIViewController
-
+@property (retain, nonatomic) IBOutlet MKMapView *mapView;
 @end

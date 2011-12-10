@@ -9,6 +9,7 @@
 #import "FirstViewController.h"
 
 @implementation FirstViewController
+@synthesize mapView = _mapView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +37,7 @@
 
 - (void)viewDidUnload
 {
+    [self setMapView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -71,4 +73,9 @@
     }
 }
 
+- (void)dealloc 
+{
+    [_mapView release];
+    [super dealloc];
+}
 @end

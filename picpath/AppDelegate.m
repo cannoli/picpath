@@ -7,18 +7,26 @@
 //
 
 #import "AppDelegate.h"
-
 #import "FirstViewController.h"
-
 #import "SecondViewController.h"
+#import "PPModel.h"
+
+@interface AppDelegate (PrivateMethods)
+- (void) appInit;
+- (void) appShutdown;
+@end
 
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize tabBarController = _tabBarController;
 
+// app variables
+@synthesize dataModel = _dataModel;
+
 - (void)dealloc
 {
+    [self appShutdown];
     [_window release];
     [_tabBarController release];
     [super dealloc];
@@ -39,6 +47,9 @@
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:viewController1, viewController2, nil];
     self.window.rootViewController = self.tabBarController;
+    
+    [self appInit];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -75,11 +86,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
+    [self appShutdown];
 }
 
 /*
@@ -95,5 +102,17 @@
 {
 }
 */
+
+#pragma mark - app routines
+- (void) appInit
+{
+    self.dataModel = [[PPModel alloc] init];
+}
+
+- (void) appShutdown
+{
+    self.dataModel = nil;
+}
+
 
 @end

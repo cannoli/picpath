@@ -23,6 +23,11 @@
 		C47073601492BC92005435C7 /* FirstViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C470735E1492BC92005435C7 /* FirstViewController_iPad.xib */; };
 		C47073631492BC92005435C7 /* SecondViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C47073611492BC92005435C7 /* SecondViewController_iPhone.xib */; };
 		C47073661492BC92005435C7 /* SecondViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C47073641492BC92005435C7 /* SecondViewController_iPad.xib */; };
+		C47073711492BF67005435C7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47073701492BF67005435C7 /* MapKit.framework */; };
+		C47073A91492D142005435C7 /* picpath.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C47073A71492D142005435C7 /* picpath.xcdatamodeld */; };
+		C47073AD1492DAB8005435C7 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = C47073AC1492DAB8005435C7 /* Event.m */; };
+		C47073B41492DBA9005435C7 /* PPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C47073B31492DBA9005435C7 /* PPModel.m */; };
+		C47073BA1492E568005435C7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47073B91492E568005435C7 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +53,13 @@
 		C470735F1492BC92005435C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstViewController_iPad.xib; sourceTree = "<group>"; };
 		C47073621492BC92005435C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController_iPhone.xib; sourceTree = "<group>"; };
 		C47073651492BC92005435C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController_iPad.xib; sourceTree = "<group>"; };
+		C47073701492BF67005435C7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C47073A81492D142005435C7 /* picpath.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = picpath.xcdatamodel; sourceTree = "<group>"; };
+		C47073AB1492DAB8005435C7 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = data/Event.h; sourceTree = "<group>"; };
+		C47073AC1492DAB8005435C7 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = data/Event.m; sourceTree = "<group>"; };
+		C47073B21492DBA9005435C7 /* PPModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PPModel.h; path = data/PPModel.h; sourceTree = "<group>"; };
+		C47073B31492DBA9005435C7 /* PPModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PPModel.m; path = data/PPModel.m; sourceTree = "<group>"; };
+		C47073B91492E568005435C7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C47073BA1492E568005435C7 /* CoreData.framework in Frameworks */,
+				C47073711492BF67005435C7 /* MapKit.framework in Frameworks */,
 				C470733C1492BC92005435C7 /* UIKit.framework in Frameworks */,
 				C470733E1492BC92005435C7 /* Foundation.framework in Frameworks */,
 				C47073401492BC92005435C7 /* CoreGraphics.framework in Frameworks */,
@@ -67,6 +81,7 @@
 		C470732C1492BC92005435C7 = {
 			isa = PBXGroup;
 			children = (
+				C47073B91492E568005435C7 /* CoreData.framework */,
 				C47073411492BC92005435C7 /* picpath */,
 				C470733A1492BC92005435C7 /* Frameworks */,
 				C47073381492BC92005435C7 /* Products */,
@@ -84,6 +99,7 @@
 		C470733A1492BC92005435C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C47073701492BF67005435C7 /* MapKit.framework */,
 				C470733B1492BC92005435C7 /* UIKit.framework */,
 				C470733D1492BC92005435C7 /* Foundation.framework */,
 				C470733F1492BC92005435C7 /* CoreGraphics.framework */,
@@ -108,6 +124,7 @@
 				C470735E1492BC92005435C7 /* FirstViewController_iPad.xib */,
 				C47073611492BC92005435C7 /* SecondViewController_iPhone.xib */,
 				C47073641492BC92005435C7 /* SecondViewController_iPad.xib */,
+				C47073AE1492DAC4005435C7 /* data */,
 				C47073421492BC92005435C7 /* Supporting Files */,
 			);
 			path = picpath;
@@ -122,6 +139,18 @@
 				C47073491492BC92005435C7 /* picpath-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C47073AE1492DAC4005435C7 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				C47073A71492D142005435C7 /* picpath.xcdatamodeld */,
+				C47073B21492DBA9005435C7 /* PPModel.h */,
+				C47073B31492DBA9005435C7 /* PPModel.m */,
+				C47073AB1492DAB8005435C7 /* Event.h */,
+				C47073AC1492DAB8005435C7 /* Event.m */,
+			);
+			name = data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +180,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "GeoloPigs Inc";
 			};
 			buildConfigurationList = C47073311492BC92005435C7 /* Build configuration list for PBXProject "picpath" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -197,6 +227,9 @@
 				C470734C1492BC92005435C7 /* AppDelegate.m in Sources */,
 				C470734F1492BC92005435C7 /* FirstViewController.m in Sources */,
 				C47073561492BC92005435C7 /* SecondViewController.m in Sources */,
+				C47073A91492D142005435C7 /* picpath.xcdatamodeld in Sources */,
+				C47073AD1492DAB8005435C7 /* Event.m in Sources */,
+				C47073B41492DBA9005435C7 /* PPModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +298,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -283,7 +316,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -334,6 +367,20 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C47073A71492D142005435C7 /* picpath.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C47073A81492D142005435C7 /* picpath.xcdatamodel */,
+			);
+			currentVersion = C47073A81492D142005435C7 /* picpath.xcdatamodel */;
+			name = picpath.xcdatamodeld;
+			path = data/picpath.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C470732E1492BC92005435C7 /* Project object */;
 }
