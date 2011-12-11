@@ -3,7 +3,7 @@
 //  picpath
 //
 //  Created by Shu Chiun Cheah on 12/9/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 GeoloPigs Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
