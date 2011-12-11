@@ -14,12 +14,17 @@ extern NSString* const kPhotoLibAssetsEnumDone;
 
 @interface PhotoLib : NSObject
 {
+    // internal
     ALAssetsLibrary* _library;
     NSMutableDictionary* _groups;
+    NSMutableDictionary* _groupEnumerationFlags;
+    
+    // external
     NSMutableArray* _photoArray;
 }
 @property (nonatomic,retain) ALAssetsLibrary* library;
 @property (nonatomic,retain) NSMutableDictionary* groups;
+@property (nonatomic,retain) NSMutableDictionary* groupEnumerationFlags;
 @property (nonatomic,retain) NSMutableArray* photoArray;
 
 // operations

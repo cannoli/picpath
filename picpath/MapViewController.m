@@ -49,12 +49,17 @@
     NSMutableArray* photos = [[PhotoLib getInstance] photoArray];
     for(ALAsset* curPhoto in photos)
     {
-        PathPoint* curPoint = [[PathPoint alloc] initWithLocation:[curPhoto valueForProperty:ALAssetPropertyLocation]];
-        MKCoordinateRegion newRegion = MKCoordinateRegionMakeWithDistance([[curPoint location] coordinate], 100.0f, 100.0f);
-        [_mapView setRegion:newRegion animated:YES];
-        [_mapView addAnnotation:curPoint];
+        CLLocation* curLoc = [curPhoto valueForProperty:ALAssetPropertyLocation];
+        NSLog(@"curLoc %@", curLoc);
+        if(curLoc)
+        {
+            PathPoint* curPoint = [[PathPoint alloc] initWithLocation:curLoc];
+            //MKCoordinateRegion newRegion = MKCoordinateRegionMakeWithDistance([[curPoint location] coordinate], 100.0f, 100.0f);
+            //[_mapView setRegion:newRegion animated:YES];
+            [_mapView addAnnotation:curPoint];
 
-        [curPoint release];
+            [curPoint release];
+        }
     }
 }
 

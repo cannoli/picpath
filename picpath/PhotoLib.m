@@ -19,6 +19,7 @@ NSString* const kPhotoLibAssetsEnumDone = @"photoLibAssetsEnumDone";
 @implementation PhotoLib
 @synthesize library = _library;
 @synthesize groups = _groups;
+@synthesize groupEnumerationFlags = _groupEnumerationFlags;
 @synthesize photoArray = _photoArray;
 
 - (id) init
@@ -28,6 +29,7 @@ NSString* const kPhotoLibAssetsEnumDone = @"photoLibAssetsEnumDone";
     {
         _library = [[ALAssetsLibrary alloc] init];
         _groups = [[NSMutableDictionary dictionary] retain];
+        _groupEnumerationFlags = [[NSMutableDictionary dictionary] retain];
         _photoArray = [[NSMutableArray array] retain];
         
         // register enumeration notifications
@@ -42,6 +44,7 @@ NSString* const kPhotoLibAssetsEnumDone = @"photoLibAssetsEnumDone";
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_photoArray release];
+    [_groupEnumerationFlags release];
     [_groups release];
     [_library release];
     [super dealloc];
@@ -53,6 +56,7 @@ NSString* const kPhotoLibAssetsEnumDone = @"photoLibAssetsEnumDone";
     @synchronized(self)
     {
         [_groups removeAllObjects];
+        [_groupEnumerationFlags removeAllObjects];
         [_photoArray removeAllObjects];
     }
     [_library enumerateGroupsWithTypes:ALAssetsGroupAll 
@@ -63,7 +67,9 @@ NSString* const kPhotoLibAssetsEnumDone = @"photoLibAssetsEnumDone";
                                     {
                                         @synchronized(self)
                                         {
-                                            [_groups setObject:group forKey:[group valueForProperty:ALAssetsGroupPropertyName]];
+                                            NSString* groupName = [group valueForProperty:ALAssetsGroupPropertyName];
+                                            [_groups setObject:group forKey:groupName];
+                                            [_groupEnumerationFlags setObject:[NSNumber numberWithBool:NO] forKey:groupName];
                                         }
                                     }
                                 }
@@ -111,6 +117,10 @@ NSString* const kPhotoLibAssetsEnumDone = @"photoLibAssetsEnumDone";
         NSLog(@"type %@", [group valueForProperty:ALAssetsGroupPropertyType]);
         NSLog(@"id %@", [group valueForProperty:ALAssetsGroupPropertyPersistentID]);
         NSLog(@"url %@", [group valueForProperty:ALAssetsGroupPropertyURL]);
+    }
+    for(NSString* groupName in _groups)
+    {
+        ALAssetsGroup* group = [_groups objectForKey:groupName];
         if(group)
         {
             [group enumerateAssetsUsingBlock:^(ALAsset* result, NSUInteger index, BOOL *stop){
@@ -130,11 +140,53 @@ NSString* const kPhotoLibAssetsEnumDone = @"photoLibAssetsEnumDone";
                 }
                 else
                 {
-                    // end of enumeration, post notification
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kPhotoLibAssetsEnumDone
+                    @synchronized(self)
+                    {
+                        // end of enum, set flag to YES
+                        [_groupEnumerationFlags setObject:[NSNumber numberWithBool:YES] forKey:groupName];
+                    }
+
+                    // if all enum done, post notification
+                    BOOL postNote = YES;
+                    for(NSString* curFlagName in _groupEnumerationFlags)
+                    {
+                        NSNumber* curFlag = [_groupEnumerationFlags objectForKey:curFlagName];
+                        if(![curFlag boolValue])
+                        {
+                            postNote = NO;
+                        }
+                    }
+                    if(postNote)
+                    {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kPhotoLibAssetsEnumDone
                                                                         object:self];
+                    }
                 }
             }];
+        }
+        else
+        {
+            @synchronized(self)
+            {
+                // end of enum, set flag to YES
+                [_groupEnumerationFlags setObject:[NSNumber numberWithBool:YES] forKey:groupName];
+            }
+            
+            // if all enum done, post notification
+            BOOL postNote = YES;
+            for(NSString* curFlagName in _groupEnumerationFlags)
+            {
+                NSNumber* curFlag = [_groupEnumerationFlags objectForKey:curFlagName];
+                if(![curFlag boolValue])
+                {
+                    postNote = NO;
+                }
+            }
+            if(postNote)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kPhotoLibAssetsEnumDone
+                                                                    object:self];
+            }
         }
     }
 }
