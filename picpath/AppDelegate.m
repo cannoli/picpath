@@ -10,6 +10,7 @@
 #import "MapViewController.h"
 #import "SecondViewController.h"
 #import "PPModel.h"
+#import "PhotoLib.h"
 
 @interface AppDelegate (PrivateMethods)
 - (void) appInit;
@@ -110,7 +111,7 @@
 - (void) appInit
 {
     self.dataModel = [[PPModel alloc] init];
-    
+    [PhotoLib getInstance];
     
     // Start the location manager.
 	[[self locationManager] startUpdatingLocation];
@@ -129,6 +130,7 @@
 - (void) appShutdown
 {
     self.locationManager = nil;
+    [PhotoLib destroyInstance];
     self.dataModel = nil;
 }
 

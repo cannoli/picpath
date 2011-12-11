@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C42973B51494540200C2661B /* PhotoLib.m in Sources */ = {isa = PBXBuildFile; fileRef = C42973B41494540200C2661B /* PhotoLib.m */; };
+		C42973BC149458BC00C2661B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42973BB149458BC00C2661B /* AssetsLibrary.framework */; };
 		C470733C1492BC92005435C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C470733B1492BC92005435C7 /* UIKit.framework */; };
 		C470733E1492BC92005435C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C470733D1492BC92005435C7 /* Foundation.framework */; };
 		C47073401492BC92005435C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C470733F1492BC92005435C7 /* CoreGraphics.framework */; };
@@ -29,9 +31,13 @@
 		C47073B41492DBA9005435C7 /* PPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C47073B31492DBA9005435C7 /* PPModel.m */; };
 		C47073BA1492E568005435C7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47073B91492E568005435C7 /* CoreData.framework */; };
 		C47073BC14934E32005435C7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47073BB14934E32005435C7 /* CoreLocation.framework */; };
+		C4A0070A149495E600706722 /* PathPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A00709149495E600706722 /* PathPoint.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C42973B31494540200C2661B /* PhotoLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoLib.h; sourceTree = "<group>"; };
+		C42973B41494540200C2661B /* PhotoLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoLib.m; sourceTree = "<group>"; };
+		C42973BB149458BC00C2661B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		C47073371492BC92005435C7 /* picpath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = picpath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C470733B1492BC92005435C7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C470733D1492BC92005435C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -62,6 +68,8 @@
 		C47073B31492DBA9005435C7 /* PPModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PPModel.m; path = data/PPModel.m; sourceTree = "<group>"; };
 		C47073B91492E568005435C7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C47073BB14934E32005435C7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C4A00708149495E600706722 /* PathPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathPoint.h; sourceTree = "<group>"; };
+		C4A00709149495E600706722 /* PathPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathPoint.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C42973BC149458BC00C2661B /* AssetsLibrary.framework in Frameworks */,
 				C47073BC14934E32005435C7 /* CoreLocation.framework in Frameworks */,
 				C47073BA1492E568005435C7 /* CoreData.framework in Frameworks */,
 				C47073711492BF67005435C7 /* MapKit.framework in Frameworks */,
@@ -101,6 +110,7 @@
 		C470733A1492BC92005435C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C42973BB149458BC00C2661B /* AssetsLibrary.framework */,
 				C47073BB14934E32005435C7 /* CoreLocation.framework */,
 				C47073B91492E568005435C7 /* CoreData.framework */,
 				C47073701492BF67005435C7 /* MapKit.framework */,
@@ -114,6 +124,10 @@
 		C47073411492BC92005435C7 /* picpath */ = {
 			isa = PBXGroup;
 			children = (
+				C42973B31494540200C2661B /* PhotoLib.h */,
+				C42973B41494540200C2661B /* PhotoLib.m */,
+				C4A00708149495E600706722 /* PathPoint.h */,
+				C4A00709149495E600706722 /* PathPoint.m */,
 				C470734A1492BC92005435C7 /* AppDelegate.h */,
 				C470734B1492BC92005435C7 /* AppDelegate.m */,
 				C470734D1492BC92005435C7 /* MapViewController.h */,
@@ -234,6 +248,8 @@
 				C47073A91492D142005435C7 /* picpath.xcdatamodeld in Sources */,
 				C47073AD1492DAB8005435C7 /* Event.m in Sources */,
 				C47073B41492DBA9005435C7 /* PPModel.m in Sources */,
+				C42973B51494540200C2661B /* PhotoLib.m in Sources */,
+				C4A0070A149495E600706722 /* PathPoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +385,7 @@
 				C470736B1492BC92005435C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

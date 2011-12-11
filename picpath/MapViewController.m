@@ -8,8 +8,14 @@
 
 #import <MapKit/MapKit.h>
 #import "MapViewController.h"
-#import "PPModel.h"
 #import "Event.h"
+#import "PPModel.h"
+#import "PhotoLib.h"
+#import "PathPoint.h"
+
+@interface MapViewController (PrivateMethods)
+- (void) photoLibEnumerationDone:(NSNotification*)note;
+@end
 
 @implementation MapViewController
 @synthesize mapView = _mapView;
@@ -37,6 +43,21 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark - photo library operations
+- (void) photoLibEnumerationDone:(NSNotification*)note
+{
+    NSMutableArray* photos = [[PhotoLib getInstance] photoArray];
+    for(ALAsset* curPhoto in photos)
+    {
+        PathPoint* curPoint = [[PathPoint alloc] initWithLocation:[curPhoto valueForProperty:ALAssetPropertyLocation]];
+        MKCoordinateRegion newRegion = MKCoordinateRegionMakeWithDistance([[curPoint location] coordinate], 100.0f, 100.0f);
+        [_mapView setRegion:newRegion animated:YES];
+        [_mapView addAnnotation:curPoint];
+
+        [curPoint release];
+    }
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -52,10 +73,14 @@
         [_mapView addAnnotation:curEvent];
     }
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoLibEnumerationDone:) 
+                                                 name:kPhotoLibAssetsEnumDone object:nil];
+    [[PhotoLib getInstance] enumeratePhotoLibrary];
 }
 
 - (void)viewDidUnload
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self setDataModel:nil];
     [self setMapView:nil];
     [super viewDidUnload];
