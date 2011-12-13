@@ -7,19 +7,30 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MKMapView.h>
+#import "NSNotificationCenter+MainThread.h"
 #import "PhotoLib.h"
+#import "PathPoint.h"
 
 NSString* const kPhotoLibGroupsEnumDone = @"photoLibGroupsEnumDone";
 NSString* const kPhotoLibAssetsEnumDone = @"photoLibAssetsEnumDone";
+NSString* const kPhotoLibNewNoteAdded = @"photoLibNewNoteAdded";
 
 @interface PhotoLib (PrivateMethods)
 - (void) groupsEnumerationDone:(NSNotification*)note;
+- (void) enumerateToMapView;
+- (void) dropPathPointForPhotoAsset:(ALAsset*)photoAsset;
 @end
 
 @implementation PhotoLib
 @synthesize library = _library;
 @synthesize groups = _groups;
 @synthesize groupEnumerationFlags = _groupEnumerationFlags;
+
+@synthesize enumeratorTargetMapView = _enumeratorTargetMapView;
+@synthesize beginDate = _beginDate;
+@synthesize endDate = _endDate;
+
 @synthesize photoArray = _photoArray;
 
 - (id) init
@@ -30,6 +41,9 @@ NSString* const kPhotoLibAssetsEnumDone = @"photoLibAssetsEnumDone";
         _library = [[ALAssetsLibrary alloc] init];
         _groups = [[NSMutableDictionary dictionary] retain];
         _groupEnumerationFlags = [[NSMutableDictionary dictionary] retain];
+        _enumeratorTargetMapView = nil;
+        _beginDate = nil;
+        _endDate = nil;
         _photoArray = [[NSMutableArray array] retain];
         
         // register enumeration notifications
@@ -44,6 +58,9 @@ NSString* const kPhotoLibAssetsEnumDone = @"photoLibAssetsEnumDone";
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_photoArray release];
+    [_endDate release];
+    [_beginDate release];
+    [_enumeratorTargetMapView release];
     [_groupEnumerationFlags release];
     [_groups release];
     [_library release];
@@ -189,6 +206,69 @@ NSString* const kPhotoLibAssetsEnumDone = @"photoLibAssetsEnumDone";
             }
         }
     }
+}
+
+- (void) dropPathPointForPhotoAsset:(ALAsset*)photoAsset
+{
+    if(ALAssetTypePhoto == [photoAsset valueForProperty:ALAssetPropertyType])
+    {/*
+        NSLog(@"type %@", [photoAsset valueForProperty:ALAssetPropertyType]);
+        NSLog(@"location %@", [photoAsset valueForProperty:ALAssetPropertyLocation]);
+        NSLog(@"duration %@", [photoAsset valueForProperty:ALAssetPropertyDuration]);
+        NSLog(@"orientation %@", [photoAsset valueForProperty:ALAssetPropertyOrientation]);
+        NSLog(@"date %@", [photoAsset valueForProperty:ALAssetPropertyDate]);
+        NSLog(@"representations %@", [photoAsset valueForProperty:ALAssetPropertyRepresentations]);
+        NSLog(@"urls %@", [photoAsset valueForProperty:ALAssetPropertyURLs]);
+       */ 
+        CLLocation* curLoc = [photoAsset valueForProperty:ALAssetPropertyLocation];
+        //NSLog(@"curLoc %@", curLoc);
+        if(curLoc)
+        {
+            PathPoint* curPoint = [[PathPoint alloc] initWithLocation:curLoc];
+            //MKCoordinateRegion newRegion = MKCoordinateRegionMakeWithDistance([[curPoint location] coordinate], 100.0f, 100.0f);
+            //[_mapView setRegion:newRegion animated:YES];
+            
+            //@synchronized(_enumeratorTargetMapView)
+            {
+                [_enumeratorTargetMapView addAnnotation:curPoint];
+                //[[NSNotificationCenter defaultCenter] postNotificationName:kPhotoLibAssetsEnumDone
+                //                                                    object:self];
+            }
+            
+            [curPoint release];
+        }
+    }
+}
+
+
+- (void) enumerateToMapView
+{
+    @autoreleasepool {
+        [_library enumerateGroupsWithTypes:ALAssetsGroupAll 
+                                usingBlock:^(ALAssetsGroup* group, BOOL* stop){
+                                    if(group && [group numberOfAssets])
+                                    {
+                                        [group enumerateAssetsUsingBlock:^(ALAsset* result, NSUInteger index, BOOL *stop){
+                                            if(result)
+                                            {
+                                                [self performSelectorOnMainThread:@selector(dropPathPointForPhotoAsset:) withObject:result waitUntilDone:NO];
+                                                //[self dropPathPointForPhotoAsset:result];
+                                            }
+                                        }];
+                                    }
+                                }
+                              failureBlock:^(NSError* error){
+                                  NSLog(@"failed to enumerate photo library with %@", error);
+                              }];
+    }
+}
+
+- (void) mapView:(MKMapView*)mapView performEnumForDateRange:(NSDate*)beginDate:(NSDate*)endDate
+{
+    self.enumeratorTargetMapView = mapView;
+    self.beginDate = beginDate;
+    self.endDate = endDate;
+    [self performSelectorInBackground:@selector(enumerateToMapView) withObject:nil];
 }
 
 #pragma mark - singleton

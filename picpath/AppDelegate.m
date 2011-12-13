@@ -11,6 +11,7 @@
 #import "SecondViewController.h"
 #import "PPModel.h"
 #import "PhotoLib.h"
+#import "RouteConfig.h"
 
 @interface AppDelegate (PrivateMethods)
 - (void) appInit;
@@ -25,6 +26,7 @@
 // app variables
 @synthesize dataModel = _dataModel;
 @synthesize locationManager = _locationManager;
+@synthesize curRouteConfig = _curRouteConfig;
 
 - (void)dealloc
 {
@@ -116,6 +118,8 @@
     // Start the location manager.
 	[[self locationManager] startUpdatingLocation];
     
+   _curRouteConfig = [[RouteConfig alloc] init];
+    
     // HACK
     /*
     CLLocation *location = [_locationManager location];
@@ -129,6 +133,7 @@
 
 - (void) appShutdown
 {
+    [_curRouteConfig release];
     self.locationManager = nil;
     [PhotoLib destroyInstance];
     self.dataModel = nil;

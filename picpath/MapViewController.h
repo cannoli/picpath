@@ -7,13 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MKMapView.h>
+
 @class MKMapView;
 @class PPModel;
-@interface MapViewController : UIViewController
+@class RouteConfig;
+@interface MapViewController : UIViewController<MKMapViewDelegate>
 {
     PPModel* _dataModel;
+    RouteConfig* _curRouteConfig;
 }
 
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) PPModel* dataModel;
+@property (nonatomic,retain) RouteConfig* curRouteConfig;
+
 @end

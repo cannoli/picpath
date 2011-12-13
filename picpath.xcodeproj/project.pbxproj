@@ -32,6 +32,8 @@
 		C47073BA1492E568005435C7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47073B91492E568005435C7 /* CoreData.framework */; };
 		C47073BC14934E32005435C7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47073BB14934E32005435C7 /* CoreLocation.framework */; };
 		C4A0070A149495E600706722 /* PathPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A00709149495E600706722 /* PathPoint.m */; };
+		C4A007181495E3B800706722 /* RouteConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A007171495E3B800706722 /* RouteConfig.m */; };
+		C4A007211496DAFA00706722 /* NSNotificationCenter+MainThread.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A007201496DAFA00706722 /* NSNotificationCenter+MainThread.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,10 @@
 		C47073BB14934E32005435C7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C4A00708149495E600706722 /* PathPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathPoint.h; sourceTree = "<group>"; };
 		C4A00709149495E600706722 /* PathPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathPoint.m; sourceTree = "<group>"; };
+		C4A007161495E3B800706722 /* RouteConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteConfig.h; sourceTree = "<group>"; };
+		C4A007171495E3B800706722 /* RouteConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteConfig.m; sourceTree = "<group>"; };
+		C4A0071F1496DAFA00706722 /* NSNotificationCenter+MainThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNotificationCenter+MainThread.h"; path = "utils/NSNotificationCenter+MainThread.h"; sourceTree = "<group>"; };
+		C4A007201496DAFA00706722 /* NSNotificationCenter+MainThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNotificationCenter+MainThread.m"; path = "utils/NSNotificationCenter+MainThread.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +130,7 @@
 		C47073411492BC92005435C7 /* picpath */ = {
 			isa = PBXGroup;
 			children = (
+				C4A0071E1496DAD300706722 /* utils */,
 				C42973B31494540200C2661B /* PhotoLib.h */,
 				C42973B41494540200C2661B /* PhotoLib.m */,
 				C4A00708149495E600706722 /* PathPoint.h */,
@@ -144,6 +151,8 @@
 				C47073641492BC92005435C7 /* SecondViewController_iPad.xib */,
 				C47073AE1492DAC4005435C7 /* data */,
 				C47073421492BC92005435C7 /* Supporting Files */,
+				C4A007161495E3B800706722 /* RouteConfig.h */,
+				C4A007171495E3B800706722 /* RouteConfig.m */,
 			);
 			path = picpath;
 			sourceTree = "<group>";
@@ -169,6 +178,15 @@
 				C47073AC1492DAB8005435C7 /* Event.m */,
 			);
 			name = data;
+			sourceTree = "<group>";
+		};
+		C4A0071E1496DAD300706722 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				C4A0071F1496DAFA00706722 /* NSNotificationCenter+MainThread.h */,
+				C4A007201496DAFA00706722 /* NSNotificationCenter+MainThread.m */,
+			);
+			name = utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +268,8 @@
 				C47073B41492DBA9005435C7 /* PPModel.m in Sources */,
 				C42973B51494540200C2661B /* PhotoLib.m in Sources */,
 				C4A0070A149495E600706722 /* PathPoint.m in Sources */,
+				C4A007181495E3B800706722 /* RouteConfig.m in Sources */,
+				C4A007211496DAFA00706722 /* NSNotificationCenter+MainThread.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

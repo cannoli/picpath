@@ -11,7 +11,9 @@
 
 extern NSString* const kPhotoLibGroupsEnumDone;
 extern NSString* const kPhotoLibAssetsEnumDone;
+extern NSString* const kPhotoLibNewNoteAdded;
 
+@class MKMapView;
 @interface PhotoLib : NSObject
 {
     // internal
@@ -19,16 +21,27 @@ extern NSString* const kPhotoLibAssetsEnumDone;
     NSMutableDictionary* _groups;
     NSMutableDictionary* _groupEnumerationFlags;
     
+    // enumerator internals
+    MKMapView* _enumeratorTargetMapView;
+    NSDate* _beginDate;
+    NSDate* _endDate;
+    
     // external
     NSMutableArray* _photoArray;
 }
 @property (nonatomic,retain) ALAssetsLibrary* library;
 @property (nonatomic,retain) NSMutableDictionary* groups;
 @property (nonatomic,retain) NSMutableDictionary* groupEnumerationFlags;
+
+@property (nonatomic,retain) MKMapView* enumeratorTargetMapView;
+@property (nonatomic,retain) NSDate* beginDate;
+@property (nonatomic,retain) NSDate* endDate;
 @property (nonatomic,retain) NSMutableArray* photoArray;
 
 // operations
 - (void) enumeratePhotoLibrary;
+- (void) mapView:(MKMapView*)mapView performEnumForDateRange:(NSDate*)beginDate:(NSDate*)endDate;
+
 
 // singleton
 + (PhotoLib*) getInstance;
