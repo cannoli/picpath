@@ -87,7 +87,6 @@
         [_mapView setRegion:newRegion animated:YES];
         [_mapView addAnnotation:curEvent];
     }
-    
 }
 
 - (void)viewDidUnload
