@@ -13,6 +13,7 @@
 #import "PhotoLib.h"
 #import "PathPoint.h"
 #import "RouteConfig.h"
+#import "ConfigViewController.h"
 
 @interface MapViewController (PrivateMethods)
 - (void) photoLibEnumerationDone:(NSNotification*)note;
@@ -86,7 +87,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoLibEnumerationDone:) 
                                                  name:kPhotoLibAssetsEnumDone object:nil];
     //[[PhotoLib getInstance] enumeratePhotoLibrary];
-    [[PhotoLib getInstance] mapView:_mapView performEnumForDateRange:[_curRouteConfig beginDate]:[_curRouteConfig endDate]];
 }
 
 - (void)viewDidUnload
@@ -128,6 +128,20 @@
     } else {
         return YES;
     }
+}
+
+#pragma mark - button actions
+- (IBAction)configNewPath:(id)sender
+{
+    ConfigViewController* newController = [[ConfigViewController alloc] initWithNibName:@"ConfigViewController" bundle:nil];
+    newController.delegate = self;
+    [self presentModalViewController:newController animated:YES];
+    [newController release];
+}
+
+- (IBAction)refreshCurRoute:(id)sender
+{
+    [[PhotoLib getInstance] mapView:_mapView performEnumForDateRange:[_curRouteConfig beginDate]:[_curRouteConfig endDate]];
 }
 
 #pragma mark -
@@ -190,6 +204,24 @@
     }
     return result;
 }
+
+
+#pragma mark - ConfigSetDelegate
+- (void) configViewController:(ConfigViewController *)configViewController newConfig:(RouteConfig *)newConfig
+{
+    if(newConfig)
+    {
+        // process new config
+    }
+    else
+    {
+        RouteConfig* defaultRouteConfig = [[RouteConfig alloc] init];
+        self.curRouteConfig = defaultRouteConfig;
+        [defaultRouteConfig release];
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 
 
 @end

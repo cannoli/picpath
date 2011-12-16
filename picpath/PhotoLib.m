@@ -240,6 +240,21 @@ NSString* const kPhotoLibNewNoteAdded = @"photoLibNewNoteAdded";
     }
 }
 
+- (void) filterPhoto:(ALAsset*)photoAsset inDateRange:(NSDate*)beginDate:(NSDate*)endDate
+{
+    if(ALAssetTypePhoto == [photoAsset valueForProperty:ALAssetPropertyType])
+    {
+        NSDate* photoDate = [photoAsset valueForProperty:ALAssetPropertyDate];
+        NSComparisonResult beginResult = [photoDate compare:beginDate];
+        NSComparisonResult endResult = [photoDate compare:endDate];
+        if(((NSOrderedSame == beginResult) || (NSOrderedDescending == beginResult)) &&
+           ((NSOrderedSame == endResult) || (NSOrderedAscending == endResult)))
+        {
+            [self performSelectorOnMainThread:@selector(dropPathPointForPhotoAsset:) withObject:photoAsset waitUntilDone:NO];
+        }
+    }
+}
+
 
 - (void) enumerateToMapView
 {
@@ -251,8 +266,7 @@ NSString* const kPhotoLibNewNoteAdded = @"photoLibNewNoteAdded";
                                         [group enumerateAssetsUsingBlock:^(ALAsset* result, NSUInteger index, BOOL *stop){
                                             if(result)
                                             {
-                                                [self performSelectorOnMainThread:@selector(dropPathPointForPhotoAsset:) withObject:result waitUntilDone:NO];
-                                                //[self dropPathPointForPhotoAsset:result];
+                                                [self filterPhoto:result inDateRange:[self beginDate] :[self endDate]];
                                             }
                                         }];
                                     }

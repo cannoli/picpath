@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MKMapView.h>
+#import "ConfigSetDelegate.h"
 
 @class MKMapView;
 @class PPModel;
 @class RouteConfig;
-@interface MapViewController : UIViewController<MKMapViewDelegate>
+@interface MapViewController : UIViewController<MKMapViewDelegate,ConfigSetDelegate>
 {
     PPModel* _dataModel;
     RouteConfig* _curRouteConfig;
@@ -21,5 +22,8 @@
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) PPModel* dataModel;
 @property (nonatomic,retain) RouteConfig* curRouteConfig;
+
+- (IBAction)configNewPath:(id)sender;
+- (IBAction)refreshCurRoute:(id)sender;
 
 @end
