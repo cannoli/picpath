@@ -39,8 +39,9 @@ extern NSString* const kPhotoLibNewNoteAdded;
 @property (nonatomic,retain) NSMutableArray* photoArray;
 
 // operations
-- (void) enumeratePhotoLibrary;
+- (void) enumeratePhotoLibraryForDateRange:(NSDate*)beginDate:(NSDate*)endDate;
 - (void) mapView:(MKMapView*)mapView performEnumForDateRange:(NSDate*)beginDate:(NSDate*)endDate;
+- (void) dropPathPointForPhotoAsset:(ALAsset*)photoAsset;
 
 
 // singleton

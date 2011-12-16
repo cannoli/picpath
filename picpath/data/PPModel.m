@@ -9,6 +9,7 @@
 #import <UIKit/UIManagedDocument.h>
 #import "PPModel.h"
 #import "Event.h"
+#import "Photo.h"
 
 static NSString* const PERSISTENTSTORE_NAME = @"PicPath.sqlite";
 
@@ -158,6 +159,21 @@ static NSString* const PERSISTENTSTORE_NAME = @"PicPath.sqlite";
 	}
 	[request release];        
     return [mutableFetchResults autorelease];
+}
+
+- (void) addPhotoAsset:(ALAsset *)photoAsset
+{
+    Photo *photo = (Photo*)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:_managedObjectContext];
+    NSDictionary* urls = [photoAsset valueForProperty:ALAssetPropertyURLs];
+    [photo setUrl:[urls objectForKey:[[photoAsset defaultRepresentation] UTI]]];
+    [photo setDate:[photoAsset valueForProperty:ALAssetPropertyDate]];
+    
+    // Commit the change.
+	NSError *error = nil;
+	if (![_managedObjectContext save:&error]) 
+    {
+		// Handle the error.
+	}
 }
 
 #pragma mark -

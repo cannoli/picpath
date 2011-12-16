@@ -13,8 +13,10 @@
 @interface PathPoint : NSObject<MKAnnotation>
 {
     CLLocation* _location;
+    unsigned int _index;
 }
 @property (nonatomic,retain) CLLocation* location;
+@property (nonatomic,assign) unsigned int index;
 - (id) initWithLocation:(CLLocation*)location;
 
 @end

@@ -19,7 +19,6 @@ NSString* const kPhotoLibNewNoteAdded = @"photoLibNewNoteAdded";
 @interface PhotoLib (PrivateMethods)
 - (void) groupsEnumerationDone:(NSNotification*)note;
 - (void) enumerateToMapView;
-- (void) dropPathPointForPhotoAsset:(ALAsset*)photoAsset;
 @end
 
 @implementation PhotoLib
@@ -68,7 +67,27 @@ NSString* const kPhotoLibNewNoteAdded = @"photoLibNewNoteAdded";
 }
 
 #pragma mark - operations
-- (void) enumeratePhotoLibrary
+
+- (void) filterPhoto:(ALAsset*)photoAsset inDateRange:(NSDate*)beginDate:(NSDate*)endDate
+{
+    if(ALAssetTypePhoto == [photoAsset valueForProperty:ALAssetPropertyType])
+    {
+        NSDate* photoDate = [photoAsset valueForProperty:ALAssetPropertyDate];
+        NSComparisonResult beginResult = [photoDate compare:beginDate];
+        NSComparisonResult endResult = [photoDate compare:endDate];
+        if(((NSOrderedSame == beginResult) || (NSOrderedDescending == beginResult)) &&
+           ((NSOrderedSame == endResult) || (NSOrderedAscending == endResult)))
+        {
+            @synchronized(self)
+            {
+                [_photoArray addObject:photoAsset];
+            }
+            //            [self performSelectorOnMainThread:@selector(dropPathPointForPhotoAsset:) withObject:photoAsset waitUntilDone:NO];
+        }
+    }
+}
+
+- (void) enumeratePhotoLibraryForDateRange:(NSDate *)beginDate :(NSDate *)endDate
 {
     @synchronized(self)
     {
@@ -76,6 +95,8 @@ NSString* const kPhotoLibNewNoteAdded = @"photoLibNewNoteAdded";
         [_groupEnumerationFlags removeAllObjects];
         [_photoArray removeAllObjects];
     }
+    self.beginDate = beginDate;
+    self.endDate = endDate;
     [_library enumerateGroupsWithTypes:ALAssetsGroupAll 
                             usingBlock:^(ALAssetsGroup* group, BOOL* stop){
                                 if(group)
@@ -100,41 +121,10 @@ NSString* const kPhotoLibNewNoteAdded = @"photoLibNewNoteAdded";
                           failureBlock:^(NSError* error){
                               NSLog(@"failed to enumerate photo library with %@", error);
                           }];
-
-    /*
-                                        [group enumerateAssetsUsingBlock:^(ALAsset* result, NSUInteger index, BOOL *stop){
-                                            if(result)
-                                            {
-                                                @synchronized(self)
-                                                {
-                                                    [_photoArray addObject:result];
-                                                }
-                                                NSLog(@"type %@", [result valueForProperty:ALAssetPropertyType]);
-                                                NSLog(@"location %@", [result valueForProperty:ALAssetPropertyLocation]);
-                                                NSLog(@"duration %@", [result valueForProperty:ALAssetPropertyDuration]);
-                                                NSLog(@"orientation %@", [result valueForProperty:ALAssetPropertyOrientation]);
-                                                NSLog(@"date %@", [result valueForProperty:ALAssetPropertyDate]);
-                                                NSLog(@"representations %@", [result valueForProperty:ALAssetPropertyRepresentations]);
-                                                NSLog(@"urls %@", [result valueForProperty:ALAssetPropertyURLs]);
-                                            }
-                                        }];
-                                    }
-                                }
-                            }
-     */
 }
 
 - (void) groupsEnumerationDone:(NSNotification*)note
 {
-    for(NSString* groupName in _groups)
-    {
-        ALAssetsGroup* group = [_groups objectForKey:groupName];
-        NSLog(@"num assets %d", [group numberOfAssets]);
-        NSLog(@"name %@", [group valueForProperty:ALAssetsGroupPropertyName]);
-        NSLog(@"type %@", [group valueForProperty:ALAssetsGroupPropertyType]);
-        NSLog(@"id %@", [group valueForProperty:ALAssetsGroupPropertyPersistentID]);
-        NSLog(@"url %@", [group valueForProperty:ALAssetsGroupPropertyURL]);
-    }
     for(NSString* groupName in _groups)
     {
         ALAssetsGroup* group = [_groups objectForKey:groupName];
@@ -143,17 +133,7 @@ NSString* const kPhotoLibNewNoteAdded = @"photoLibNewNoteAdded";
             [group enumerateAssetsUsingBlock:^(ALAsset* result, NSUInteger index, BOOL *stop){
                 if(result)
                 {
-                    @synchronized(self)
-                    {
-                        [_photoArray addObject:result];
-                    }
-                    NSLog(@"type %@", [result valueForProperty:ALAssetPropertyType]);
-                    NSLog(@"location %@", [result valueForProperty:ALAssetPropertyLocation]);
-                    NSLog(@"duration %@", [result valueForProperty:ALAssetPropertyDuration]);
-                    NSLog(@"orientation %@", [result valueForProperty:ALAssetPropertyOrientation]);
-                    NSLog(@"date %@", [result valueForProperty:ALAssetPropertyDate]);
-                    NSLog(@"representations %@", [result valueForProperty:ALAssetPropertyRepresentations]);
-                    NSLog(@"urls %@", [result valueForProperty:ALAssetPropertyURLs]);
+                    [self filterPhoto:result inDateRange:[self beginDate] :[self endDate]];
                 }
                 else
                 {
@@ -217,9 +197,9 @@ NSString* const kPhotoLibNewNoteAdded = @"photoLibNewNoteAdded";
         NSLog(@"duration %@", [photoAsset valueForProperty:ALAssetPropertyDuration]);
         NSLog(@"orientation %@", [photoAsset valueForProperty:ALAssetPropertyOrientation]);
         NSLog(@"date %@", [photoAsset valueForProperty:ALAssetPropertyDate]);
-        NSLog(@"representations %@", [photoAsset valueForProperty:ALAssetPropertyRepresentations]);
-        NSLog(@"urls %@", [photoAsset valueForProperty:ALAssetPropertyURLs]);
-       */ 
+        NSLog(@"representations %@", [photoAsset valueForProperty:ALAssetPropertyRepresentations]);*/
+       // NSLog(@"urls %@", [photoAsset valueForProperty:ALAssetPropertyURLs]);
+       
         CLLocation* curLoc = [photoAsset valueForProperty:ALAssetPropertyLocation];
         //NSLog(@"curLoc %@", curLoc);
         if(curLoc)
@@ -239,22 +219,6 @@ NSString* const kPhotoLibNewNoteAdded = @"photoLibNewNoteAdded";
         }
     }
 }
-
-- (void) filterPhoto:(ALAsset*)photoAsset inDateRange:(NSDate*)beginDate:(NSDate*)endDate
-{
-    if(ALAssetTypePhoto == [photoAsset valueForProperty:ALAssetPropertyType])
-    {
-        NSDate* photoDate = [photoAsset valueForProperty:ALAssetPropertyDate];
-        NSComparisonResult beginResult = [photoDate compare:beginDate];
-        NSComparisonResult endResult = [photoDate compare:endDate];
-        if(((NSOrderedSame == beginResult) || (NSOrderedDescending == beginResult)) &&
-           ((NSOrderedSame == endResult) || (NSOrderedAscending == endResult)))
-        {
-            [self performSelectorOnMainThread:@selector(dropPathPointForPhotoAsset:) withObject:photoAsset waitUntilDone:NO];
-        }
-    }
-}
-
 
 - (void) enumerateToMapView
 {
@@ -279,10 +243,12 @@ NSString* const kPhotoLibNewNoteAdded = @"photoLibNewNoteAdded";
 
 - (void) mapView:(MKMapView*)mapView performEnumForDateRange:(NSDate*)beginDate:(NSDate*)endDate
 {
+    [_photoArray removeAllObjects];
     self.enumeratorTargetMapView = mapView;
     self.beginDate = beginDate;
     self.endDate = endDate;
-    [self performSelectorInBackground:@selector(enumerateToMapView) withObject:nil];
+//    [self performSelectorInBackground:@selector(enumerateToMapView) withObject:nil];
+    [self enumerateToMapView];
 }
 
 #pragma mark - singleton

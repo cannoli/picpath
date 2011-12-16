@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface PPModel : NSObject
 {
@@ -21,5 +22,6 @@
 
 - (void) saveContext;
 - (void) addEventWithDate:(NSDate*)eventDate location:(CLLocation*)eventLoc;
+- (void) addPhotoAsset:(ALAsset*)photoAsset;
 - (NSMutableArray*) fetchEvents;
 @end

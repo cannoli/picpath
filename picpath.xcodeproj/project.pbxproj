@@ -31,6 +31,8 @@
 		C47073B41492DBA9005435C7 /* PPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C47073B31492DBA9005435C7 /* PPModel.m */; };
 		C47073BA1492E568005435C7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47073B91492E568005435C7 /* CoreData.framework */; };
 		C47073BC14934E32005435C7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47073BB14934E32005435C7 /* CoreLocation.framework */; };
+		C47298DA149B21DC00423A9E /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = C47298D9149B21DC00423A9E /* Photo.m */; };
+		C47298DE149B2BED00423A9E /* ALAsset+PhotoLib.m in Sources */ = {isa = PBXBuildFile; fileRef = C47298DD149B2BED00423A9E /* ALAsset+PhotoLib.m */; };
 		C4A0070A149495E600706722 /* PathPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A00709149495E600706722 /* PathPoint.m */; };
 		C4A007181495E3B800706722 /* RouteConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A007171495E3B800706722 /* RouteConfig.m */; };
 		C4A007211496DAFA00706722 /* NSNotificationCenter+MainThread.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A007201496DAFA00706722 /* NSNotificationCenter+MainThread.m */; };
@@ -72,6 +74,10 @@
 		C47073B31492DBA9005435C7 /* PPModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PPModel.m; path = data/PPModel.m; sourceTree = "<group>"; };
 		C47073B91492E568005435C7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C47073BB14934E32005435C7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C47298D8149B21DC00423A9E /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = data/Photo.h; sourceTree = "<group>"; };
+		C47298D9149B21DC00423A9E /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = data/Photo.m; sourceTree = "<group>"; };
+		C47298DC149B2BED00423A9E /* ALAsset+PhotoLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+PhotoLib.h"; sourceTree = "<group>"; };
+		C47298DD149B2BED00423A9E /* ALAsset+PhotoLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+PhotoLib.m"; sourceTree = "<group>"; };
 		C4A00708149495E600706722 /* PathPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathPoint.h; sourceTree = "<group>"; };
 		C4A00709149495E600706722 /* PathPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathPoint.m; sourceTree = "<group>"; };
 		C4A007161495E3B800706722 /* RouteConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteConfig.h; sourceTree = "<group>"; };
@@ -137,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				C4A0071E1496DAD300706722 /* utils */,
+				C47298DC149B2BED00423A9E /* ALAsset+PhotoLib.h */,
+				C47298DD149B2BED00423A9E /* ALAsset+PhotoLib.m */,
 				C42973B31494540200C2661B /* PhotoLib.h */,
 				C42973B41494540200C2661B /* PhotoLib.m */,
 				C4A00708149495E600706722 /* PathPoint.h */,
@@ -182,6 +190,8 @@
 			isa = PBXGroup;
 			children = (
 				C47073A71492D142005435C7 /* picpath.xcdatamodeld */,
+				C47298D8149B21DC00423A9E /* Photo.h */,
+				C47298D9149B21DC00423A9E /* Photo.m */,
 				C47073B21492DBA9005435C7 /* PPModel.h */,
 				C47073B31492DBA9005435C7 /* PPModel.m */,
 				C47073AB1492DAB8005435C7 /* Event.h */,
@@ -282,6 +292,8 @@
 				C4A007181495E3B800706722 /* RouteConfig.m in Sources */,
 				C4A007211496DAFA00706722 /* NSNotificationCenter+MainThread.m in Sources */,
 				C4C5A2E4149AC48D005EBB6D /* ConfigViewController.m in Sources */,
+				C47298DA149B21DC00423A9E /* Photo.m in Sources */,
+				C47298DE149B2BED00423A9E /* ALAsset+PhotoLib.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

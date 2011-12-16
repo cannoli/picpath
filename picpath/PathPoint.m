@@ -10,13 +10,14 @@
 
 @implementation PathPoint
 @synthesize location = _location;
-
+@synthesize index = _index;
 - (id) initWithLocation:(CLLocation*)location
 {
     self = [super init];
     if(self)
     {
         _location = [location retain];
+        _index = 0;
     }
     return self;
 }
@@ -31,6 +32,11 @@
 - (CLLocationCoordinate2D) coordinate
 {
     return [_location coordinate];
+}
+
+- (NSString*) title
+{
+    return [NSString stringWithFormat:@"%d",_index];
 }
 
 @end

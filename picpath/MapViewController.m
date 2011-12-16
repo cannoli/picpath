@@ -14,6 +14,7 @@
 #import "PathPoint.h"
 #import "RouteConfig.h"
 #import "ConfigViewController.h"
+#import "ALAsset+PhotoLib.h"
 
 @interface MapViewController (PrivateMethods)
 - (void) photoLibEnumerationDone:(NSNotification*)note;
@@ -30,7 +31,7 @@
         self.title = NSLocalizedString(@"First", @"First");
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
         _dataModel = nil;
-        _curRouteConfig = nil;
+        _curRouteConfig = [[RouteConfig alloc] init];
     }
     return self;
 }
@@ -51,20 +52,23 @@
 
 #pragma mark - photo library operations
 - (void) photoLibEnumerationDone:(NSNotification*)note
-{
+{   
     NSMutableArray* photos = [[PhotoLib getInstance] photoArray];
+    [photos sortUsingSelector:@selector(compareDate:)];
+    unsigned int index = 0;
     for(ALAsset* curPhoto in photos)
     {
         CLLocation* curLoc = [curPhoto valueForProperty:ALAssetPropertyLocation];
-        NSLog(@"curLoc %@", curLoc);
         if(curLoc)
         {
             PathPoint* curPoint = [[PathPoint alloc] initWithLocation:curLoc];
+            curPoint.index = index;
             //MKCoordinateRegion newRegion = MKCoordinateRegionMakeWithDistance([[curPoint location] coordinate], 100.0f, 100.0f);
             //[_mapView setRegion:newRegion animated:YES];
             [_mapView addAnnotation:curPoint];
 
             [curPoint release];
+            ++index;
         }
     }
 }
@@ -83,10 +87,7 @@
         [_mapView setRegion:newRegion animated:YES];
         [_mapView addAnnotation:curEvent];
     }
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoLibEnumerationDone:) 
-                                                 name:kPhotoLibAssetsEnumDone object:nil];
-    //[[PhotoLib getInstance] enumeratePhotoLibrary];
+    
 }
 
 - (void)viewDidUnload
@@ -141,7 +142,17 @@
 
 - (IBAction)refreshCurRoute:(id)sender
 {
-    [[PhotoLib getInstance] mapView:_mapView performEnumForDateRange:[_curRouteConfig beginDate]:[_curRouteConfig endDate]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoLibEnumerationDone:) 
+                                                 name:kPhotoLibAssetsEnumDone object:nil];
+    [[PhotoLib getInstance] enumeratePhotoLibraryForDateRange:[_curRouteConfig beginDate] :[_curRouteConfig endDate]];
+
+//    [[PhotoLib getInstance] mapView:_mapView performEnumForDateRange:[_curRouteConfig beginDate]:[_curRouteConfig endDate]];
+//    NSMutableArray* photoArray = [[PhotoLib getInstance] photoArray];
+//    [photoArray sortUsingSelector:@selector(compareDate:)];
+//    for(ALAsset* cur in photoArray)
+//    {
+//        [[PhotoLib getInstance] dropPathPointForPhotoAsset:cur];
+//    }
 }
 
 #pragma mark -
@@ -193,6 +204,7 @@
             {
                 MKPinAnnotationView* newPin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"PathPoint"];
                 newPin.animatesDrop = YES;
+                newPin.canShowCallout = YES;
                 result = newPin;
                 //NSLog(@"new pin");
             }
