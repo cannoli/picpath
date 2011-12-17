@@ -33,6 +33,8 @@
 		C47073BC14934E32005435C7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47073BB14934E32005435C7 /* CoreLocation.framework */; };
 		C47298DA149B21DC00423A9E /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = C47298D9149B21DC00423A9E /* Photo.m */; };
 		C47298DE149B2BED00423A9E /* ALAsset+PhotoLib.m in Sources */ = {isa = PBXBuildFile; fileRef = C47298DD149B2BED00423A9E /* ALAsset+PhotoLib.m */; };
+		C47298E1149BCBDA00423A9E /* Route.m in Sources */ = {isa = PBXBuildFile; fileRef = C47298E0149BCBDA00423A9E /* Route.m */; };
+		C47298E4149C42CE00423A9E /* PhotoPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = C47298E3149C42CE00423A9E /* PhotoPoint.m */; };
 		C4A0070A149495E600706722 /* PathPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A00709149495E600706722 /* PathPoint.m */; };
 		C4A007181495E3B800706722 /* RouteConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A007171495E3B800706722 /* RouteConfig.m */; };
 		C4A007211496DAFA00706722 /* NSNotificationCenter+MainThread.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A007201496DAFA00706722 /* NSNotificationCenter+MainThread.m */; };
@@ -78,6 +80,10 @@
 		C47298D9149B21DC00423A9E /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = data/Photo.m; sourceTree = "<group>"; };
 		C47298DC149B2BED00423A9E /* ALAsset+PhotoLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+PhotoLib.h"; sourceTree = "<group>"; };
 		C47298DD149B2BED00423A9E /* ALAsset+PhotoLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+PhotoLib.m"; sourceTree = "<group>"; };
+		C47298DF149BCBDA00423A9E /* Route.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Route.h; sourceTree = "<group>"; };
+		C47298E0149BCBDA00423A9E /* Route.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Route.m; sourceTree = "<group>"; };
+		C47298E2149C42CE00423A9E /* PhotoPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoPoint.h; sourceTree = "<group>"; };
+		C47298E3149C42CE00423A9E /* PhotoPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPoint.m; sourceTree = "<group>"; };
 		C4A00708149495E600706722 /* PathPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathPoint.h; sourceTree = "<group>"; };
 		C4A00709149495E600706722 /* PathPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathPoint.m; sourceTree = "<group>"; };
 		C4A007161495E3B800706722 /* RouteConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteConfig.h; sourceTree = "<group>"; };
@@ -147,8 +153,6 @@
 				C47298DD149B2BED00423A9E /* ALAsset+PhotoLib.m */,
 				C42973B31494540200C2661B /* PhotoLib.h */,
 				C42973B41494540200C2661B /* PhotoLib.m */,
-				C4A00708149495E600706722 /* PathPoint.h */,
-				C4A00709149495E600706722 /* PathPoint.m */,
 				C470734A1492BC92005435C7 /* AppDelegate.h */,
 				C470734B1492BC92005435C7 /* AppDelegate.m */,
 				C47073501492BC92005435C7 /* first.png */,
@@ -165,6 +169,12 @@
 				C47073641492BC92005435C7 /* SecondViewController_iPad.xib */,
 				C47073AE1492DAC4005435C7 /* data */,
 				C47073421492BC92005435C7 /* Supporting Files */,
+				C47298DF149BCBDA00423A9E /* Route.h */,
+				C47298E0149BCBDA00423A9E /* Route.m */,
+				C4A00708149495E600706722 /* PathPoint.h */,
+				C4A00709149495E600706722 /* PathPoint.m */,
+				C47298E2149C42CE00423A9E /* PhotoPoint.h */,
+				C47298E3149C42CE00423A9E /* PhotoPoint.m */,
 				C4A007161495E3B800706722 /* RouteConfig.h */,
 				C4A007171495E3B800706722 /* RouteConfig.m */,
 				C4C5A2E1149AC48D005EBB6D /* ConfigViewController.h */,
@@ -294,6 +304,8 @@
 				C4C5A2E4149AC48D005EBB6D /* ConfigViewController.m in Sources */,
 				C47298DA149B21DC00423A9E /* Photo.m in Sources */,
 				C47298DE149B2BED00423A9E /* ALAsset+PhotoLib.m in Sources */,
+				C47298E1149BCBDA00423A9E /* Route.m in Sources */,
+				C47298E4149C42CE00423A9E /* PhotoPoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

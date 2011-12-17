@@ -7,10 +7,13 @@
 //
 
 #import "PathPoint.h"
+#import "PhotoPoint.h"
 
 @implementation PathPoint
 @synthesize location = _location;
 @synthesize index = _index;
+@synthesize photos = _photos;
+
 - (id) initWithLocation:(CLLocation*)location
 {
     self = [super init];
@@ -18,14 +21,31 @@
     {
         _location = [location retain];
         _index = 0;
+        _photos = [[NSMutableArray array] retain];
     }
     return self;
 }
 
 - (void) dealloc
 {
+    [_photos release];
     [_location release];
     [super dealloc];
+}
+
+- (void) addPhotoPoint:(PhotoPoint *)photoPoint
+{
+    [_photos addObject:photoPoint];
+}
+
+- (void) removePhotoPoints:(PhotoPoint*)photoPoint
+{
+    [_photos removeObject:photoPoint];
+}
+
+- (void) removeAllPhotoPoints
+{
+    [_photos removeAllObjects];
 }
 
 #pragma mark - MKAnnotation delegate

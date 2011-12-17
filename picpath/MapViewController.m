@@ -13,6 +13,7 @@
 #import "PhotoLib.h"
 #import "PathPoint.h"
 #import "RouteConfig.h"
+#import "Route.h"
 #import "ConfigViewController.h"
 #import "ALAsset+PhotoLib.h"
 
@@ -24,6 +25,7 @@
 @synthesize mapView = _mapView;
 @synthesize dataModel = _dataModel;
 @synthesize curRouteConfig = _curRouteConfig;
+@synthesize curRoute = _curRoute;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,12 +34,15 @@
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
         _dataModel = nil;
         _curRouteConfig = [[RouteConfig alloc] init];
+        _curRoute = nil;
     }
     return self;
 }
 
 - (void)dealloc 
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];    
+    [_curRoute release];
     [_curRouteConfig release];
     [_dataModel release];
     [_mapView release];
@@ -54,6 +59,7 @@
 - (void) photoLibEnumerationDone:(NSNotification*)note
 {   
     NSMutableArray* photos = [[PhotoLib getInstance] photoArray];
+    /*
     [photos sortUsingSelector:@selector(compareDate:)];
     unsigned int index = 0;
     for(ALAsset* curPhoto in photos)
@@ -71,6 +77,18 @@
             ++index;
         }
     }
+    */
+    // create a new route with enumerated photo array
+    Route* newRoute = [[Route alloc] initWithPhotoArray:photos];
+    self.curRoute = newRoute;
+    [newRoute release];
+    
+    // drop pins for this route
+    for(PathPoint* cur in _curRoute.path)
+    {
+        cur.index = [[cur photos] count];
+        [_mapView addAnnotation:cur];
+    }
 }
 
 #pragma mark - View lifecycle
@@ -87,10 +105,15 @@
         [_mapView setRegion:newRegion animated:YES];
         [_mapView addAnnotation:curEvent];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoLibEnumerationDone:) 
+                                                 name:kPhotoLibAssetsEnumDone object:nil];
 }
 
 - (void)viewDidUnload
 {
+    self.curRoute = nil;
+    self.curRouteConfig = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_mapView setDelegate:nil];
     [self setDataModel:nil];
@@ -141,8 +164,6 @@
 
 - (IBAction)refreshCurRoute:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoLibEnumerationDone:) 
-                                                 name:kPhotoLibAssetsEnumDone object:nil];
     [[PhotoLib getInstance] enumeratePhotoLibraryForDateRange:[_curRouteConfig beginDate] :[_curRouteConfig endDate]];
 
 //    [[PhotoLib getInstance] mapView:_mapView performEnumForDateRange:[_curRouteConfig beginDate]:[_curRouteConfig endDate]];
