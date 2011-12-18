@@ -28,5 +28,4 @@
 
 - (IBAction)configNewPath:(id)sender;
 - (IBAction)refreshCurRoute:(id)sender;
-
 @end

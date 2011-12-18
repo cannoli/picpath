@@ -17,8 +17,12 @@
 #import "ConfigViewController.h"
 #import "ALAsset+PhotoLib.h"
 
+static const float REGION_MINWIDTH = 50.0f;
+static const float REGION_MINHEIGHT = 50.0f;
+
 @interface MapViewController (PrivateMethods)
 - (void) photoLibEnumerationDone:(NSNotification*)note;
+- (void) centerMap:(MKMapView*)mapView onRoute:(Route *)route;
 @end
 
 @implementation MapViewController
@@ -30,7 +34,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"First", @"First");
+        self.title = NSLocalizedString(@"Map", @"Map");
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
         _dataModel = nil;
         _curRouteConfig = [[RouteConfig alloc] init];
@@ -82,12 +86,80 @@
     Route* newRoute = [[Route alloc] initWithPhotoArray:photos];
     self.curRoute = newRoute;
     [newRoute release];
-    
+
+    [self centerMap:_mapView onRoute:_curRoute];
+
     // drop pins for this route
     for(PathPoint* cur in _curRoute.path)
     {
         cur.index = [[cur photos] count];
         [_mapView addAnnotation:cur];
+    }    
+}
+
+- (void) centerMap:(MKMapView*)mapView onRoute:(Route *)route
+{
+    NSArray* pathPoints = route.path;
+    if([pathPoints count])
+    {   
+        unsigned int index = 0;
+        PathPoint* firstPathPoint = [pathPoints objectAtIndex:index];
+        CLLocationCoordinate2D firstCoord = [[firstPathPoint location] coordinate];
+        MKMapPoint firstPoint = MKMapPointForCoordinate(firstCoord);
+        double minX = firstPoint.x;
+        double maxX = firstPoint.x;
+        double minY = firstPoint.y;
+        double maxY = firstPoint.y;
+        
+        ++index;
+        while(index < [pathPoints count])
+        {
+            PathPoint* curPathPoint = [pathPoints objectAtIndex:index];
+            CLLocationCoordinate2D curCoord = [[curPathPoint location] coordinate];
+            MKMapPoint curPoint = MKMapPointForCoordinate(curCoord);
+            
+            if(curPoint.x < minX)
+            {
+                minX = curPoint.x;
+            }
+            else if(curPoint.x > maxX)
+            {
+                maxX = curPoint.x;
+            }
+            if(curPoint.y < minY)
+            {
+                minY = curPoint.y;
+            }
+            else if(curPoint.y > maxY)
+            {
+                maxY = curPoint.y;
+            }
+                
+            ++index;
+        }
+        
+        MKMapRect regionRect = MKMapRectMake(minX, minY, maxX - minX, maxY - minY);
+        MKCoordinateRegion routeRegion = MKCoordinateRegionForMapRect(regionRect);
+        [mapView setRegion:routeRegion animated:YES];
+        
+        /*
+        double halfWidth = 0.5f * (maxX - minX);
+        double halfHeight = 0.5f * (maxY - minY);
+        MKMapPoint center = MKMapPointMake(halfWidth + minX, halfHeight + minY);
+        double regionWidth = halfWidth;
+        if(regionWidth < REGION_MINWIDTH)
+        {
+            regionWidth = REGION_MINWIDTH;
+        }
+        double regionHeight = halfHeight;
+        if(regionHeight < REGION_MINHEIGHT)
+        {
+            regionHeight = REGION_MINHEIGHT;
+        }
+        MKCoordinateRegion routeRegion = MKCoordinateRegionMakeWithDistance(MKCoordinateForMapPoint(center), 
+                                                                            regionWidth, regionHeight);
+        [mapView setRegion:routeRegion animated:YES];
+         */
     }
 }
 
