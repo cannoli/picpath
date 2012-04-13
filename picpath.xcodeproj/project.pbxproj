@@ -245,7 +245,7 @@
 		C470732E1492BC92005435C7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "GeoloPigs Inc";
 			};
 			buildConfigurationList = C47073311492BC92005435C7 /* Build configuration list for PBXProject "picpath" */;

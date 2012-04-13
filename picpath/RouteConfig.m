@@ -20,7 +20,7 @@ static const float kSecondsPerDay = 60.0f * 60.0f * 24.0f;
     if(self)
     {
         self.endDate = [NSDate date];
-        self.beginDate = [_endDate dateByAddingTimeInterval:-(kSecondsPerDay * 3.0f)];
+        self.beginDate = [_endDate dateByAddingTimeInterval:-(kSecondsPerDay * 150.0f)];
         NSLog(@"begin %@; end %@", _beginDate, _endDate);
     }
     return self;
